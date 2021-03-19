@@ -12,7 +12,7 @@ services:
       - static-files:/static-files
 
   backend:
-    image: backend:latest
+    image: registry.gitlab.propulsion-home.ch/full-stack/batch-15-february-2021/full-stack-motion-projects/tencindin/backend:latest
     restart: always
     env_file:
       - ./envs/dev.env
