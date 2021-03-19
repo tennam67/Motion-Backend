@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - media-files:/media-files
+      - static-files:/static-files
+
+  backend:
+    image: backend:latest
+    restart: always
+    env_file:
+      - ./envs/dev.env
+    command: 'sh /scripts/run.sh'
+    volumes:
+      - media-files:/media-files
+      - static-files:/static-files
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    # these volumes pass the data from your computer to the docker container
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - ./envs/dev.env
+
+# this volume create directory in your computer so that if no matter what happens to the container the data will not be delete
+volumes:
+  postgres:
+  media-files:
+  static-files:
