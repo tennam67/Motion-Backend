@@ -5,7 +5,8 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 RUN apt-get update && apt-get upgrade -y && apt-get install -qqy \
         wget \
         bzip2 \
-        graphviz
+        graphviz \
+        curl
 
 #RUN curl -sL https://deb.nodesource.com/setup_13.x | bash - && apt-get install -y nodejs && apt-get install -y npm
 
