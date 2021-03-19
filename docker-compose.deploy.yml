@@ -6,10 +6,13 @@ services:
     restart: always
     ports:
       - "80:80"
+      - "443:443"
     volumes:
+      - frontend:/frontend
       - ./nginx:/etc/nginx/conf.d
       - media-files:/media-files
       - static-files:/static-files
+      - /etc/letsencrypt:/etc/letsencrypt
 
   backend:
     image: registry.gitlab.propulsion-home.ch/full-stack/batch-15-february-2021/full-stack-motion-projects/tencindin/backend:latest
@@ -18,6 +21,7 @@ services:
       - ./envs/dev.env
     command: 'sh /scripts/run.sh'
     volumes:
+      - frontend:/frontend/build
       - media-files:/media-files
       - static-files:/static-files
     depends_on:
@@ -36,3 +40,4 @@ volumes:
   postgres:
   media-files:
   static-files:
+  frontend:
