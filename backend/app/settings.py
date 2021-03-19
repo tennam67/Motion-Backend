@@ -30,7 +30,6 @@ DEBUG = ast.literal_eval(os.environ.get('DJANGO_DEBUG'))
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -91,7 +90,6 @@ DATABASES = {
 }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -132,4 +130,3 @@ STATIC_ROOT = '/static-files/'
 STATIC_URL = '/static-files/'
 MEDIA_ROOT = '/media-files/'
 MEDIA_URL = '/media-files/'
-
