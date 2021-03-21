@@ -28,8 +28,8 @@ SECRET_KEY = 'e1f&==n2)hwzh&a6elqp*q)v%9mh(bj2sbo4sjw7sy4x#l=ypk'
 # DEBUG = True
 DEBUG = ast.literal_eval(os.environ.get('DJANGO_DEBUG'))
 
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['localhost', 'tencindin.propulsion-learn.ch', 'www.tencindin.propulsion-learn.ch']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'tencindin.propulsion-learn.ch', 'www.tencindin.propulsion-learn.ch']
 
 
 # Application definition
