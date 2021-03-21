@@ -29,6 +29,8 @@ SECRET_KEY = 'e1f&==n2)hwzh&a6elqp*q)v%9mh(bj2sbo4sjw7sy4x#l=ypk'
 DEBUG = ast.literal_eval(os.environ.get('DJANGO_DEBUG'))
 
 ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['localhost', 'tencindin.propulsion-learn.ch', 'www.tencindin.propulsion-learn.ch']
+
 
 # Application definition
 
@@ -43,6 +45,8 @@ INSTALLED_APPS = [
     # 3rd party
     'rest_framework',
     'drf_yasg',
+
+    # own apps
 ]
 
 MIDDLEWARE = [
@@ -160,3 +164,12 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=2),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2)
 }
+
+# SMTP Gmail Service
+## IMPORTANT - DONT FORGET TO ADD THE ENV VARIABLES IN THE ENV FILE
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
