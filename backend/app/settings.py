@@ -49,8 +49,12 @@ INSTALLED_APPS = [
     # own apps
     'app',
     'app.users',
-    # 'app.social',
-    'app.registration'
+    'app.friend_request',
+    'app.image',
+    'app.comment',
+    'app.post',
+    'app.interest',
+    'app.registration',
 ]
 
 MIDDLEWARE = [
