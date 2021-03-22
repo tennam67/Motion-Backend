@@ -31,7 +31,6 @@ DEBUG = ast.literal_eval(os.environ.get('DJANGO_DEBUG'))
 # ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'tencindin.propulsion-learn.ch', 'www.tencindin.propulsion-learn.ch']
 
-
 # Application definition
 
 INSTALLED_APPS = [
