@@ -7,4 +7,4 @@ User = get_user_model()
 
 class Interest(models.Model):
     interest = models.CharField(max_length=90, blank=False)
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="things_user_like")
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="things_user_like", null=True, blank=True)
