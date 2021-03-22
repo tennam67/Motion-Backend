@@ -11,5 +11,5 @@ class FriendRequest(models.Model):
         ("a", "accepted"),
         ("r", "rejected")
     ], )
-    requester = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="requested", null=True, blank=True)
+    requester = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="requested", blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)

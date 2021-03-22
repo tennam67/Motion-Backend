@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     # own apps
-    'app',
     'app.users',
     'app.friend_request',
     'app.image',

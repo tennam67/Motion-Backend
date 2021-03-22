@@ -37,9 +37,7 @@ schema_view = get_schema_view(
 
 api_patterns = [
     path('auth/', include('app.registration.urls')),
-    # these will come when we set up our 'users' and 'social' apps
     path('users/', include('app.users.urls')),
-    # path('social/', include('app.social.urls')),
     path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 
