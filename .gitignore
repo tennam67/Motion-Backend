@@ -1,8 +1,7 @@
 .idea
 .DS_Store
 *.pyc
-__pycache__
-*.sqlite3
+**/__pycache__/
 media-files
 static-files
 /app/.coverage
