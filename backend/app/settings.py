@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'tencindin.propulsion-learn.ch', 'www.t
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
