@@ -47,6 +47,10 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     # own apps
+    'app',
+    'app.users',
+    # 'app.social',
+    'app.registration'
 ]
 
 MIDDLEWARE = [
@@ -166,10 +170,12 @@ SIMPLE_JWT = {
 }
 
 # SMTP Gmail Service
-## IMPORTANT - DONT FORGET TO ADD THE ENV VARIABLES IN THE ENV FILE
+# IMPORTANT - DONT FORGET TO ADD THE ENV VARIABLES IN THE ENV FILE
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
+
+AUTH_USER_MODEL = 'users.User'
