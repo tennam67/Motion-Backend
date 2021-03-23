@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth.admin import UserAdmin
-
+# from .models import User
 User = get_user_model()
 
 
@@ -20,7 +20,7 @@ class UserAdmin(UserAdmin):
     # fields when reading / updating an instance
     fieldsets = (
         (None, {'fields': ('email', 'username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'avatar', "job", "location", "followees")}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
         ('Groups', {'fields': ('groups',)}),

@@ -31,8 +31,8 @@ DEBUG = ast.literal_eval(os.environ.get('DJANGO_DEBUG'))
 # ALLOWED_HOSTS = ['*']
 ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'tencindin.propulsion-learn.ch', 'www.tencindin.propulsion-learn.ch']
 
-
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -47,10 +47,13 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     # own apps
-    'app',
     'app.users',
-    # 'app.social',
-    'app.registration'
+    'app.friend_request',
+    'app.image',
+    'app.comment',
+    'app.post',
+    'app.interest',
+    'app.registration',
 ]
 
 MIDDLEWARE = [
