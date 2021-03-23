@@ -2,11 +2,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-# from app.friend_request.models import FriendRequest
-
 
 def user_directory_path(instance, filename):
-    return f"{instance.id}/{filename}"
+    return f"user_{instance.id}/{filename}"
 
 
 class User(AbstractUser):
@@ -31,8 +29,6 @@ class User(AbstractUser):
     job = models.CharField(max_length=200, blank=True)
     avatar = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
     followees = models.ManyToManyField(to='self', related_name='followers', blank=True, symmetrical=False)
-    # received = models.ForeignKey(to=FriendRequest, on_delete=models.CASCADE, related_name='receiver',
-    #                              blank=True, null=True)
 
     def __str__(self):
         return self.username

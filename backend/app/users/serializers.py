@@ -30,7 +30,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'last_name', 'username', 'location', 'about_me',
-                  'logged_in_user_is_following', 'amount_of_posts', 'amount_of_posts', 'amount_of_likes',
-                  'amount_of_followers', 'amount_following']
+        fields = ['id', 'email', 'first_name', 'last_name', 'username', 'location', 'about_me']
         read_only_fields = ['email']
+
+    # class Meta:
+    #     model = User
+    #     fields = ['id', 'email', 'first_name', 'last_name', 'username', 'location', 'about_me',
+    #               'logged_in_user_is_following', 'amount_of_posts', 'amount_of_posts', 'amount_of_likes',
+    #               'amount_of_followers', 'amount_following']
+    #     read_only_fields = ['email']
