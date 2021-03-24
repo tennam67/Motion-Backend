@@ -10,7 +10,7 @@ class FriendRequest(models.Model):
         ("pending", "pending"),
         ("accepted", "accepted"),
         ("rejected", "rejected")
-    ], )
+    ], default='pending')
     from_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="friendship_requests_sent", blank=True, null=True)
     to_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='friendship_requests_received', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
