@@ -41,11 +41,25 @@ class RegistrationSerializer(serializers.Serializer):
 
 
 class RegistrationValidationSerializer(serializers.Serializer):
+
+    code = serializers.CharField(label='security code')
+    email = serializers.CharField(label='email')
+    username = serializers.CharField(label='username')
+    first_name = serializers.CharField()
+    last_name = serializers.CharField(label='last name')
+    password = serializers.CharField(label='password')
+    password_repeat = serializers.CharField(label='password repeat')
+
     # Validate
     def validate(self, data):
         code = data.get('code')
         email = data.get('email')
-        user = User.objects.get(email=email, registration__code=code)
+
+        user = User.objects.get(
+            email=email,
+            registration__code=code,
+            registration__used=False
+        )
 
         if not user:
             raise ValidationError('Invalid verification code')
@@ -61,17 +75,21 @@ class RegistrationValidationSerializer(serializers.Serializer):
     # Save
     def save(self, validated_data):
         # - update user new information (username, password)
-        user = User(
+        user = User.objects.get(
             email=validated_data['email'],
-            code=validated_data['code'],
+            registration__code=validated_data['code'],
+            registration__used=False
         )
 
+        user.username = validated_data['username']
+        user.first_name = validated_data['first_name']
+        user.last_name = validated_data['last_name']
+        user.is_active = True
         user.set_password(validated_data['password'])
         user.save()
-
+        user.registration.used = True
+        user.registration.save()
         return user
-
-        # - update the registration
 
 
 # class ResetPasswordSerializer():
