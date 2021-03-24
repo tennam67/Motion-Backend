@@ -30,7 +30,7 @@ class ValidationView(GenericAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-# class RestPasswordView(GenericAPIView):
+# class ResetPasswordView(GenericAPIView):
 #     serializer_class = ResetPasswordSerializer
 #     permission_classes = []
 #
@@ -41,7 +41,7 @@ class ValidationView(GenericAPIView):
 #         return Response(status=status.HTTP_201_CREATED)
 #
 #
-# class RestPasswordValidationView(GenericAPIView):
+# class ResetPasswordValidationView(GenericAPIView):
 #     serializer_class = ResetPasswordValidationSerializer
 #     permission_classes = []
 #
