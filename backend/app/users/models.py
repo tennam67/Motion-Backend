@@ -1,4 +1,4 @@
-# from django.conf import settings
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -28,7 +28,7 @@ class User(AbstractUser):
     about_me = models.CharField(max_length=1000, blank=True)
     job = models.CharField(max_length=200, blank=True)
     avatar = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
-    followees = models.ManyToManyField(to='self', related_name='followers', blank=True, symmetrical=False)
+    followees = models.ManyToManyField(to=settings.AUTH_USER_MODEL, related_name='followers', blank=True, symmetrical=False)
 
     def __str__(self):
         return self.username
