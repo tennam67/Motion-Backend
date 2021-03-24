@@ -10,6 +10,19 @@ class GetAllUserView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = ShortUserDetailSerializer
 
+    def get(self, request, *args, **kwargs):
+        keyword = request.query_params.get("search")
+        users = self.queryset.filter(username=keyword)
+        serializer = self.get_serializer(users, many=True)
+        return Response(serializer.data)
+
+    # def get_queryset(self):
+    #     queryset = User.objects.all()
+    #     username = self.request.query_params.get('search', None)
+    #     if username is not None:
+    #         queryset = queryset.filter(username=username)
+    #     return queryset
+
 
 #  Get specific user details
 class GetSpecificUserView(RetrieveAPIView):
