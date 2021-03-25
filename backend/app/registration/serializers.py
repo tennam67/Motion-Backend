@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from rest_framework import serializers
 
-from app.registration.models import Registration
+from app.registration.models import Registration, code_generator
 
 User = get_user_model()
 
@@ -16,6 +16,15 @@ def email_validation(email):
         return email
 
 
+def email_exists_validation(email):
+    try:
+        User.objects.get(email=email)
+        return email
+    except User.DoesNotExist:
+        raise ValidationError(message='user does not exist')
+
+
+# send email with registration code
 class RegistrationSerializer(serializers.Serializer):
     email = serializers.EmailField(label='email to register', validators=[email_validation])
 
@@ -32,7 +41,7 @@ class RegistrationSerializer(serializers.Serializer):
         #  send email
         send_mail(
             'Your motion registration code',
-            f'Here is your code: {registration.code}',
+            f'Here is your registration code: {registration.code}',
             'tencindin@gmail.com',
             [f'{new_user.email}'],
             fail_silently=False,
@@ -40,6 +49,7 @@ class RegistrationSerializer(serializers.Serializer):
         return new_user
 
 
+# validate registration with required fields
 class RegistrationValidationSerializer(serializers.Serializer):
 
     code = serializers.CharField(label='security code')
@@ -58,7 +68,8 @@ class RegistrationValidationSerializer(serializers.Serializer):
         user = User.objects.get(
             email=email,
             registration__code=code,
-            registration__used=False
+            registration__used=False,
+            registration__action='RE',
         )
 
         if not user:
@@ -92,9 +103,76 @@ class RegistrationValidationSerializer(serializers.Serializer):
         return user
 
 
-# class ResetPasswordSerializer():
-#     pass
-#
-#
-# class ResetPasswordValidationSerializer():
-#     pass
+# send email with code for password reset
+class ResetPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(label='email for password reset',
+                                   validators=[email_exists_validation])
+
+    def save(self, validated_data):
+        email = validated_data.get('email')
+        existing_user = User.objects.get(email=email, is_active=True)
+
+        # create code
+        registration = Registration.objects.get(user=existing_user)
+        registration.action = 'PW'
+        registration.code = code_generator()
+        registration.used = False
+        registration.save()
+
+        #  send email
+        send_mail(
+            'Your motion password reset code',
+            f'Here is your password reset code: {registration.code}',
+            'tencindin@gmail.com',
+            [f'{existing_user.email}'],
+            fail_silently=False,
+        )
+
+        return existing_user
+
+
+# reset password with code from email
+class ResetPasswordValidationSerializer(serializers.Serializer):
+
+    code = serializers.CharField(label='security code')
+    email = serializers.CharField(label='email')
+    password = serializers.CharField(label='password')
+    password_repeat = serializers.CharField(label='password repeat')
+
+    # Validate
+    def validate(self, data):
+        code = data.get('code')
+        email = data.get('email')
+
+        user = User.objects.get(
+            email=email,
+            registration__code=code,
+            registration__used=False,
+            registration__action='PW',
+        )
+
+        if not user:
+            raise ValidationError('Invalid verification code')
+
+        password = data.get('password')
+        password_repeat = data.get('password_repeat')
+
+        if password != password_repeat:
+            raise ValidationError('Passwords do not match.')
+
+        return data
+
+    # Save new password to user profile
+    def save(self, validated_data):
+        # update user new information (password)
+        user = User.objects.get(
+            email=validated_data['email'],
+            registration__code=validated_data['code'],
+            registration__used=False
+        )
+
+        user.set_password(validated_data['password'])
+        user.save()
+        user.registration.used = True
+        user.registration.save()
+        return user
