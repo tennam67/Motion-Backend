@@ -4,7 +4,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
 from app.registration.serializers import RegistrationSerializer, RegistrationValidationSerializer, \
-    ResetPasswordSerializer
+    ResetPasswordSerializer, ResetPasswordValidationSerializer
 
 User = get_user_model()
 
@@ -42,12 +42,12 @@ class ResetPasswordView(GenericAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-# class ResetPasswordValidationView(GenericAPIView):
-#     serializer_class = ResetPasswordValidationSerializer
-#     permission_classes = []
-#
-#     def patch(self, request):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save(serializer.validated_data)
-#         return Response(status=status.HTTP_201_CREATED)
+class ResetPasswordValidationView(GenericAPIView):
+    serializer_class = ResetPasswordValidationSerializer
+    permission_classes = []
+
+    def patch(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(serializer.validated_data)
+        return Response(status=status.HTTP_201_CREATED)

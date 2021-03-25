@@ -24,6 +24,7 @@ def email_exists_validation(email):
         raise ValidationError(message='user does not exist')
 
 
+# send email with registration code
 class RegistrationSerializer(serializers.Serializer):
     email = serializers.EmailField(label='email to register', validators=[email_validation])
 
@@ -48,6 +49,7 @@ class RegistrationSerializer(serializers.Serializer):
         return new_user
 
 
+# validate registration with required fields
 class RegistrationValidationSerializer(serializers.Serializer):
 
     code = serializers.CharField(label='security code')
@@ -100,6 +102,7 @@ class RegistrationValidationSerializer(serializers.Serializer):
         return user
 
 
+# send emil with code for password reset
 class ResetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField(label='email for password reset',
                                    validators=[email_exists_validation])
@@ -127,6 +130,48 @@ class ResetPasswordSerializer(serializers.Serializer):
         return existing_user
 
 
-# class ResetPasswordValidationSerializer():
-#     pass
-#
+# reset password with code from email
+class ResetPasswordValidationSerializer(serializers.Serializer):
+
+    code = serializers.CharField(label='security code')
+    email = serializers.CharField(label='email')
+    password = serializers.CharField(label='password')
+    password_repeat = serializers.CharField(label='password repeat')
+
+    # Validate
+    def validate(self, data):
+        code = data.get('code')
+        email = data.get('email')
+
+        user = User.objects.get(
+            email=email,
+            registration__code=code,
+            registration__used=False
+        )
+
+        if not user:
+            raise ValidationError('Invalid verification code')
+
+        password = data.get('password')
+        password_repeat = data.get('password_repeat')
+
+        if password != password_repeat:
+            raise ValidationError('Passwords do not match.')
+
+        return data
+
+    # Save
+    def save(self, validated_data):
+        # - update user new information (password)
+        user = User.objects.get(
+            email=validated_data['email'],
+            registration__code=validated_data['code'],
+            registration__used=False
+        )
+
+        # user.is_active = True
+        user.set_password(validated_data['password'])
+        user.save()
+        user.registration.used = True
+        user.registration.save()
+        return user
