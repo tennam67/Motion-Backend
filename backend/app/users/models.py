@@ -44,17 +44,17 @@ class User(AbstractUser):
     def get_short_name(self):
         return self.username
 
-    @property
-    def friends(self):
-        friends_list = []
-        friendships_requested = FriendRequest.objects.filter(
-            status="accepted",
-            from_user=self)
-        friendships_received = FriendRequest.objects.filter(
-            to_user=self,
-            status='accepted')
-        for friend in friendships_requested:
-            friends_list.append(friend.to_user)
-        for friend in friendships_received:
-            friends_list.append(friend.from_user)
-        return friends_list
+    # @property
+    # def friends(self):
+    #     friends_list = []
+    #     friendships_requested = FriendRequest.objects.filter(
+    #         status="accepted",
+    #         from_user=self)
+    #     friendships_received = FriendRequest.objects.filter(
+    #         to_user=self,
+    #         status='accepted')
+    #     for friend in friendships_requested:
+    #         friends_list.append(friend.to_user)
+    #     for friend in friendships_received:
+    #         friends_list.append(friend.from_user)
+    #     return friends_list

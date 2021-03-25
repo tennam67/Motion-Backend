@@ -30,22 +30,22 @@ class CreateFriendRequestView(CreateAPIView):
 class GetListOfFriends(ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
-    queryset = User.objects.all()
+    # queryset = User.objects.all()
 
-    def filter_queryset(self, queryset):
-        return self.request.user.friends
+    # def filter_queryset(self, queryset):
+    #     return self.request.user.friends
 
 # user app model property decorator of friends is similar to the code below
-    # def get_queryset(self):
-        # list_friends = []
-        # user = self.request.user
-        # friendships_requested = FriendRequest.objects.filter(from_user=user, status='accepted')
-        # friendships_received = FriendRequest.objects.filter(to_user=user, status='accepted')
-        # for friend in friendships_requested:
-        #     list_friends.append(friend.to_user)
-        # for friend in friendships_received:
-        #     list_friends.append(friend.from_user)
-        # return list_friends
+    def get_queryset(self):
+        list_friends = []
+        user = self.request.user
+        friendships_requested = FriendRequest.objects.filter(from_user=user, status='accepted')
+        friendships_received = FriendRequest.objects.filter(to_user=user, status='accepted')
+        for friend in friendships_requested:
+            list_friends.append(friend.to_user)
+        for friend in friendships_received:
+            list_friends.append(friend.from_user)
+        return list_friends
 
 
 class GetUpdateDeleteFriendRequestView(RetrieveUpdateDestroyAPIView):

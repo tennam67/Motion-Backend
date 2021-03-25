@@ -25,7 +25,8 @@ class UserSerializer(serializers.ModelSerializer):
     hobby = serializers.SerializerMethodField()
     followees = ShortUserDetailSerializer(many=True, read_only=True)
     followers = ShortUserDetailSerializer(many=True, read_only=True)
-    friends = ShortUserDetailSerializer(many=True, read_only=True)
+
+    # friends = ShortUserDetailSerializer(many=True, read_only=True)
 
     def get_hobby(self, instance):
         hobbies = []
@@ -47,7 +48,7 @@ class UserSerializer(serializers.ModelSerializer):
                   'about_me',
                   'followees',
                   'followers',
-                  'hobby',
-                  'friends']
+                  'hobby', ]
+        # 'friends']
 
         ordering = ['id']
