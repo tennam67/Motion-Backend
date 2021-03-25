@@ -1,0 +1,1377 @@
+{
+	"info": {
+		"_postman_id": "2d911da3-9eb2-4ddc-9f13-8ac7d044dc14",
+		"name": "tencindin_complete_01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth / Registration Copy",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setGlobalVariable(\"access\", jsonData.access);",
+									"postman.setGlobalVariable(\"refresh\", jsonData.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"dinoprossi@gmail.com\",\n    \"password\":\"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tencindin.propulsion-learn.ch/backend/api/auth/token/",
+							"protocol": "https",
+							"host": [
+								"tencindin",
+								"propulsion-learn",
+								"ch"
+							],
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Verify",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setGlobalVariable(\"access\", jsonData.access);",
+									"postman.setGlobalVariable(\"refresh\", jsonData.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE2ODYxMzYzLCJqdGkiOiIyZTQxZTkyZmQ5MmU0M2EzODU0NTk1MzZmYjJkMzA0MiIsInVzZXJfaWQiOjF9.PyXaqToNvOn7Qeo8oBD7HTDT6GwneuvAocKE9odtsh4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tencindin.propulsion-learn.ch/backend/api/auth/token/verify/",
+							"protocol": "https",
+							"host": [
+								"tencindin",
+								"propulsion-learn",
+								"ch"
+							],
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"token",
+								"verify",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Refresh",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setGlobalVariable(\"access\", jsonData.access);",
+									"postman.setGlobalVariable(\"refresh\", jsonData.refresh);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refresh\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxNjg2MTMzMSwianRpIjoiMzc5MTI4MTQ5MTgzNGY5NjhkMGY0MTk3ZTllZTU4YWMiLCJ1c2VyX2lkIjoxfQ.5Fvw89FeJCQCgw-Mn4p79b3Gkq6QCwBeS4wqlQermSk\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tencindin.propulsion-learn.ch/backend/api/auth/token/refresh/",
+							"protocol": "https",
+							"host": [
+								"tencindin",
+								"propulsion-learn",
+								"ch"
+							],
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"token",
+								"refresh",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration Code Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"jasecej657@bombaya.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tencindin.propulsion-learn.ch/backend/api/auth/registration/",
+							"protocol": "https",
+							"host": [
+								"tencindin",
+								"propulsion-learn",
+								"ch"
+							],
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"registration",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Resgistration Validation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"jasecej657@bombaya.com\",\n    \"code\":\"88857\",\n    \"username\":\"jas\",\n    \"first_name\":\"first\",\n    \"last_name\":\"last\",\n    \"password\":\"hello3030\",\n    \"password_repeat\":\"hello3030\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tencindin.propulsion-learn.ch/backend/api/auth/registration/validation/",
+							"protocol": "https",
+							"host": [
+								"tencindin",
+								"propulsion-learn",
+								"ch"
+							],
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"registration",
+								"validation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password Reset Email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"jasecej657@bombaya.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tencindin.propulsion-learn.ch/backend/api/auth/password-reset/",
+							"protocol": "https",
+							"host": [
+								"tencindin",
+								"propulsion-learn",
+								"ch"
+							],
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"password-reset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Password Reset Validation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\":\"15234\",\n    \"email\":\"jasecej657@bombaya.com\",\n    \"password\":\"hello4040\",\n    \"password_repeat\":\"hello4040\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://tencindin.propulsion-learn.ch/backend/api/auth/password-reset/validation/",
+							"protocol": "https",
+							"host": [
+								"tencindin",
+								"propulsion-learn",
+								"ch"
+							],
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"password-reset",
+								"validation",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Auth / Registration endpoints, including:\n- Login\n- Token Verify\n- Token Refresh\n- Registration Email Code\n- Registration Validation\n- Password Reset Email Code\n- Password Reset Validation"
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setGlobalVariable(\"access\", jsonData.access);",
+									"postman.setGlobalVariable(\"refresh\", jsonData.refresh);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "test@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admintest",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/auth/token/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post posts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "hello",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "hey",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/posts/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"posts",
+								""
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "hello",
+									"disabled": true
+								},
+								{
+									"key": "content",
+									"value": "hey",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "patch posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE2NjkxNDQ2LCJqdGkiOiI5MjBlYjhhMTkwYTk0OGViODg1OTM1NzllZDMwMjBiOSIsInVzZXJfaWQiOjF9.Wl64N5nnHh29EW-uvz6GcO2-T76D5vAT2lX9IioX_l8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "patched",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/posts/21/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"posts",
+								"21",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE2Njg4NDM4LCJqdGkiOiI3MDdiM2Y4ZDBkMWY0Nzk2ODk1NGRmMjc4NWI0OTE1NCIsInVzZXJfaWQiOjF9.IibNIKp8BqQ7JNYfvSpEDEV0mTWfa74KiXGHPpJUId0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "hello",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "testhi",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/posts/20",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"posts",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete posts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE2NjkxNDQ2LCJqdGkiOiI5MjBlYjhhMTkwYTk0OGViODg1OTM1NzllZDMwMjBiOSIsInVzZXJfaWQiOjF9.Wl64N5nnHh29EW-uvz6GcO2-T76D5vAT2lX9IioX_l8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "patched",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/posts/21/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"posts",
+								"21",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get userposts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggle like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjE2ODM0OTAzLCJqdGkiOiJhMjNjMzY4MGZjZTY0MzI4YWQ3ZjhlNzA3Mzg0Yjc2MyIsInVzZXJfaWQiOjJ9.eYpz4RQxw2i_p26RnDrDayUCx41vGRL_79arKNiCRCo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/posts/like-post/10/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"posts",
+								"like-post",
+								"10",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get followed users posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get posts liked by user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Toggle follow/unfollow a user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/users/followers/toggle-follow/1/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"users",
+								"followers",
+								"toggle-follow",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of all the people the current user is following",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/users/followers/followers/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"users",
+								"followers",
+								"followers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List of all the logged in user’s followers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/users/followers/following/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"users",
+								"followers",
+								"following",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send friend request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "pk",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/social/friends/request/2/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"social",
+								"friends",
+								"request",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get list of a friend request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/social/friends/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"social",
+								"friends",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept or Reject an open friend",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "status",
+									"value": "accepted",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/friends/requests/4/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"friends",
+								"requests",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a friend request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/friends/requests/2/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"friends",
+								"requests",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all accepted friends",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/friends/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"friends",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all the users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/users/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/users/?search=lobsang",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "lobsang"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific user profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/users/1/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"users",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comment",
+			"item": [
+				{
+					"name": "Get all comments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/comments/comments/1/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"comments",
+								"comments",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "content",
+									"value": "Data variables let you test multiple instances of a request in one go. Imagine that you want to test an API that lets users post comments on a post. Using data variables, you can test for hundreds of variations of a request with different IDs, tokens or content bodies.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/comments/comments/1/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"comments",
+								"comments",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Me",
+			"item": [
+				{
+					"name": "logged in user’s profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "about_me",
+									"value": "My name is Tenzin.",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/users/me/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"users",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update the logged in user’s profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "about_me",
+									"value": "My name is Tenzin.",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Lhasa",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/users/me/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"users",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setGlobalVariable(\"access\", jsonData.access);",
+									"postman.setGlobalVariable(\"refresh\", jsonData.refresh);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "tenzin@admin.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8000/backend/api/auth/token/",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8000",
+							"path": [
+								"backend",
+								"api",
+								"auth",
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
