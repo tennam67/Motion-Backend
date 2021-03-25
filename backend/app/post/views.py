@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from app.image.models import PostImage
 from app.post.models import Post
+from app.users.models import User
 from app.post.permissions import IsOwnerOrReadOnly, IsNotOwner
 from app.post.serializers import PostSerializer
 
@@ -37,15 +38,13 @@ class RetrieveUpdateDestroyPost(RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
 
 
-# doesnt work yet, get specific users posts
+# get specific users posts
 class ListSpecificUserPosts(ListAPIView):
-    # queryset = Post.objects.all().order_by('-created')
+
     serializer_class = PostSerializer
-    # lookup_url_kwarg = 'user_id'
-    # lookup_field = 'id'
 
     def get_queryset(self):
-        return Post.objects.filter(author__id=self.kwargs['user_id'])
+        return Post.objects.filter(author__id=self.kwargs['user_id']).order_by('-created')
 
 
 # toggle like
@@ -63,4 +62,21 @@ class CreateLike(GenericAPIView):
         else:
             post.likers.add(user)
         return Response(self.get_serializer(post).data)
+
+#get all posts user likes
+class GetLikedPostsByUser(ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        return self.request.user.liked_posts.all()
+
+# get all posts of followed users
+class GetFollowedUsersPosts(ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        followed_user_ids = self.request.user.followees.all().values_list("id", flat=True)
+        posts = Post.objects.filter(author__in=followed_user_ids)
+        return posts
+
 
