@@ -68,7 +68,8 @@ class RegistrationValidationSerializer(serializers.Serializer):
         user = User.objects.get(
             email=email,
             registration__code=code,
-            registration__used=False
+            registration__used=False,
+            registration__action='RE',
         )
 
         if not user:
@@ -102,7 +103,7 @@ class RegistrationValidationSerializer(serializers.Serializer):
         return user
 
 
-# send emil with code for password reset
+# send email with code for password reset
 class ResetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField(label='email for password reset',
                                    validators=[email_exists_validation])
@@ -146,7 +147,8 @@ class ResetPasswordValidationSerializer(serializers.Serializer):
         user = User.objects.get(
             email=email,
             registration__code=code,
-            registration__used=False
+            registration__used=False,
+            registration__action='PW',
         )
 
         if not user:
@@ -160,16 +162,15 @@ class ResetPasswordValidationSerializer(serializers.Serializer):
 
         return data
 
-    # Save
+    # Save new password to user profile
     def save(self, validated_data):
-        # - update user new information (password)
+        # update user new information (password)
         user = User.objects.get(
             email=validated_data['email'],
             registration__code=validated_data['code'],
             registration__used=False
         )
 
-        # user.is_active = True
         user.set_password(validated_data['password'])
         user.save()
         user.registration.used = True
