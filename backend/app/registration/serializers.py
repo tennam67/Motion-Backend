@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.mail import send_mail
 from rest_framework import serializers
 
-from app.registration.models import Registration
+from app.registration.models import Registration, code_generator
 
 User = get_user_model()
 
@@ -14,6 +14,14 @@ def email_validation(email):
         raise ValidationError(message='email already taken')
     except User.DoesNotExist:
         return email
+
+
+def email_exists_validation(email):
+    try:
+        User.objects.get(email=email)
+        return email
+    except User.DoesNotExist:
+        raise ValidationError(message='user does not exist')
 
 
 class RegistrationSerializer(serializers.Serializer):
@@ -32,7 +40,7 @@ class RegistrationSerializer(serializers.Serializer):
         #  send email
         send_mail(
             'Your motion registration code',
-            f'Here is your code: {registration.code}',
+            f'Here is your registration code: {registration.code}',
             'tencindin@gmail.com',
             [f'{new_user.email}'],
             fail_silently=False,
@@ -92,9 +100,33 @@ class RegistrationValidationSerializer(serializers.Serializer):
         return user
 
 
-# class ResetPasswordSerializer():
-#     pass
-#
-#
+class ResetPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(label='email for password reset',
+                                   validators=[email_exists_validation])
+
+    def save(self, validated_data):
+        email = validated_data.get('email')
+        existing_user = User.objects.get(email=email, is_active=True)
+
+        # create code
+        registration = Registration.objects.get(user=existing_user)
+        registration.action = 'PW'
+        registration.code = code_generator()
+        registration.used = False
+        registration.save()
+
+        #  send email
+        send_mail(
+            'Your motion password reset code',
+            f'Here is your password reset code: {registration.code}',
+            'tencindin@gmail.com',
+            [f'{existing_user.email}'],
+            fail_silently=False,
+        )
+
+        return existing_user
+
+
 # class ResetPasswordValidationSerializer():
 #     pass
+#
