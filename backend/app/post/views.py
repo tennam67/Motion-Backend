@@ -3,18 +3,29 @@ from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView, GenericAPIView
 from rest_framework.permissions import IsAuthenticated
 
+from app.image.models import PostImage
 from app.post.models import Post
 from app.post.permissions import IsOwnerOrReadOnly, IsNotOwner
 from app.post.serializers import PostSerializer
 
 
-# get and create posts
+# get and create posts and with image
 class ListCreatePost(ListCreateAPIView):
     queryset = Post.objects.all().order_by('-created')
     serializer_class = PostSerializer
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+    # def perform_create(self, serializer):
+    #     serializer.save(author=self.request.user)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        post = serializer.save(author=self.request.user)
+        upload_img = request.FILES.getlist('post_images')
+        for f in upload_img:
+            image = PostImage(post=post, image=f)
+            image.save()
+        return Response(serializer.data)
 
 
 # update and delete posts if you're the logged in user or admin
