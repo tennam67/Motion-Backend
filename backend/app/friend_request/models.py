@@ -1,8 +1,8 @@
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.db import models
 
+
 # Create your models here.
-User = get_user_model()
 
 
 class FriendRequest(models.Model):
@@ -11,8 +11,10 @@ class FriendRequest(models.Model):
         ("accepted", "accepted"),
         ("rejected", "rejected")
     ], default='pending')
-    from_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="friendship_requests_sent", blank=True, null=True)
-    to_user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='friendship_requests_received', blank=True, null=True)
+    from_user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                  related_name="friendship_requests_sent", blank=True, null=True)
+    to_user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                related_name='friendship_requests_received', blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

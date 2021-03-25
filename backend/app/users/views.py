@@ -9,12 +9,13 @@ from app.users.serializers import UserSerializer, ShortUserDetailSerializer
 class GetAllUserView(ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = ShortUserDetailSerializer
+    permission_classes = []
 
-    def get(self, request, *args, **kwargs):
-        keyword = request.query_params.get("search")
-        users = self.queryset.filter(username=keyword)
-        serializer = self.get_serializer(users, many=True)
-        return Response(serializer.data)
+    # def get(self, request, *args, **kwargs):
+    #     keyword = request.query_params.get("search")
+    #     users = self.queryset.filter(username=keyword)
+    #     serializer = self.get_serializer(users, many=True)
+    #     return Response(serializer.data)
 
     # def get_queryset(self):
     #     queryset = User.objects.all()
@@ -22,6 +23,18 @@ class GetAllUserView(ListCreateAPIView):
     #     if username is not None:
     #         queryset = queryset.filter(username=username)
     #     return queryset
+
+
+class UrlUserSearchView(ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = ShortUserDetailSerializer
+    permission_classes = []
+
+    def get(self, request, *args, **kwargs):
+        keyword = request.query_params.get("search")
+        users = self.queryset.filter(username=keyword)
+        serializer = self.get_serializer(users, many=True)
+        return Response(serializer.data)
 
 
 #  Get specific user details
