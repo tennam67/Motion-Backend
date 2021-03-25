@@ -3,6 +3,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+# from app.friend_request.models import FriendRequest
+from app.friend_request.models import FriendRequest
+
+
 def user_directory_path(instance, filename):
     return f"user_{instance.id}/{filename}"
 
@@ -28,7 +32,8 @@ class User(AbstractUser):
     about_me = models.CharField(max_length=1000, blank=True)
     job = models.CharField(max_length=200, blank=True)
     avatar = models.ImageField(upload_to=user_directory_path, blank=True, null=True)
-    followees = models.ManyToManyField(to=settings.AUTH_USER_MODEL, related_name='followers', blank=True, symmetrical=False)
+    followees = models.ManyToManyField(to=settings.AUTH_USER_MODEL, related_name='followers', blank=True,
+                                       symmetrical=False)
 
     def __str__(self):
         return self.username
@@ -38,3 +43,18 @@ class User(AbstractUser):
 
     def get_short_name(self):
         return self.username
+
+    # @property
+    # def friends(self):
+    #     friends_list = []
+    #     friendships_requested = FriendRequest.objects.filter(
+    #         status="accepted",
+    #         from_user=self)
+    #     friendships_received = FriendRequest.objects.filter(
+    #         to_user=self,
+    #         status='accepted')
+    #     for friend in friendships_requested:
+    #         friends_list.append(friend.to_user)
+    #     for friend in friendships_received:
+    #         friends_list.append(friend.from_user)
+    #     return friends_list

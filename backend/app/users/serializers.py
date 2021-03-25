@@ -32,12 +32,16 @@ class UserSerializer(serializers.ModelSerializer):
     followees = ShortUserDetailSerializer(many=True, read_only=True)
     followers = ShortUserDetailSerializer(many=True, read_only=True)
 
+    # friends = ShortUserDetailSerializer(many=True, read_only=True)
+
     def get_hobby(self, instance):
         hobbies = []
         things_user_like = Interest.objects.filter(user=instance).values()
         for hobby in things_user_like:
             hobbies.append(hobby['interest'])
         return hobbies
+        # things_user_like = Interest.objects.values_list('interest')
+        # return things_user_like
 
     class Meta:
         model = User
@@ -50,6 +54,7 @@ class UserSerializer(serializers.ModelSerializer):
                   'about_me',
                   'followees',
                   'followers',
-                  'hobby']
+                  'hobby', ]
+        # 'friends']
 
         ordering = ['id']
