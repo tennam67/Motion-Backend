@@ -12,6 +12,12 @@ def code_generator(length=5):
 
 
 class Registration(models.Model):
+    ACTION_CHOICES = [
+        ('RE', 'Registration Email'),
+        ('PW', 'Password Reset')
+    ]
+
+    action = models.CharField(choices=ACTION_CHOICES, max_length=2, default='RE')
     code = models.CharField(max_length=6, default=code_generator)
     used = models.BooleanField(default=False, blank=True)
     user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name='registration')

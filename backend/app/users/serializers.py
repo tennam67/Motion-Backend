@@ -8,6 +8,12 @@ from app.interest.serializers import InterestSerializer
 User = get_user_model()
 
 
+class UserLikedPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username']
+
+
 class ShortUserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
