@@ -52,6 +52,7 @@ class CreateLike(GenericAPIView):
     queryset = Post
     serializer_class = PostSerializer
     lookup_url_kwarg = 'post_id'
+    #permission_classes = [IsNotOwner]
 
     def patch(self, request, *args, **kwargs):
         post = self.get_object()
