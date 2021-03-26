@@ -28,7 +28,6 @@ const Feed = () => {
   const dispatch = useDispatch();
 console.log(posts)
   useEffect(async () => {
-    // debugger
     const res = await getPostsApi("posts/");
     dispatch(postsFriends(res));
   }, []);
@@ -97,9 +96,9 @@ console.log(posts)
                         />
                         <div className="userpost-time">
                           <p>
-                            {post.user.first_name && post.user.last_name
-                              ? `${post.user.first_name} ${post.user.last_name}`
-                              : post.user.username}
+                            {post.author.hasOwnProperty("first_name") && post.author.hasOwnProperty("last_name")
+                              ? `${post.author.first_name} ${post.author.last_name}`
+                              : post.author.username}
                           </p>
                           <p>Just now</p>
                         </div>
@@ -117,8 +116,8 @@ console.log(posts)
                     </div>
                     <div className="pictures">
                       <div>
-                        {post.images.length ? (
-                          post.images.map(({ image }, index) => (
+                        {post.post_images.length ? (
+                          post.post_images.map(({ image }, index) => (
                             <img
                               className="postImage"
                               src={image}
@@ -144,14 +143,14 @@ console.log(posts)
                       <div className="social-media-buttons">
                         <div className="like">
                           <i className="fas fa-heart"></i>
-                          <p>{post.user.amount_of_likes}Like</p>
+                          <p>{post.author.total_likes}Like</p>
                         </div>
                         <div className="share">
                           <i className="fas fa-share"></i>
                           <p>Share</p>
                         </div>
                       </div>
-                      <p> {post.user.amount_of_likes} likes</p>
+                      <p> {post.author.total_likes} likes</p>
                     </SocialMedia>
                   </Post>
                 </Content>

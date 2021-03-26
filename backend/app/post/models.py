@@ -5,7 +5,7 @@ User = get_user_model()
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100, blank=False)
+    title = models.CharField(max_length=100, blank=True, null=True)
     content = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

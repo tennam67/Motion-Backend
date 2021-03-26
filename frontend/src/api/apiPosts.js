@@ -13,15 +13,19 @@ let config = {
 export const getPostsApi = async (url) => {
   if (!token) return new Error("Log in please");
   const response = await axios.get(`${BASE_URL}${url}`, config);
-  return response.data;
+  return response.data.results;
 };
 
 export const createPostApi = async (data, URL) => {
   if (!token) return new Error("Log in please");
   let url = `${BASE_URL}${URL}`;
+  let dataToSend = data;
+  if (!data.images.length){
+    dataToSend = {content: data.content}
+  }
   const response = await axios.post(
     url,
-    { content: data.content, images: data.images },
+    dataToSend,
     config
   );
   return response.data;
