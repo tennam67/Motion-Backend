@@ -18,6 +18,6 @@ urlpatterns = [
     path('followers/following/', GetUserFollowingView.as_view()),
     path('followers/followers/', GetUserFollowerView.as_view()),
     path('followers/toggle-follow/<int:user_id>/', UserFollowUnFollowToggle.as_view()),
-    path('?search=<str:search_string>/', UrlUserSearchView.as_view()),
+    path('search', UrlUserSearchView.as_view()),
 ]
 

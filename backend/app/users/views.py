@@ -31,7 +31,7 @@ class UrlUserSearchView(ListCreateAPIView):
     permission_classes = []
 
     def get(self, request, *args, **kwargs):
-        keyword = request.query_params.get("search")
+        keyword = request.query_params.get("keyword")
         users = self.queryset.filter(username=keyword)
         serializer = self.get_serializer(users, many=True)
         return Response(serializer.data)
